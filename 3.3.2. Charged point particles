@@ -1,0 +1,56 @@
+#Project ID: 3.3.2 S32
+#Project title:Charged point particles
+#
+#Name Surname:Zohra Shikhalizada
+#Student ID:2203594
+#
+#Version 1
+#History
+
+
+k = 8.99 * (10 ** 9)
+
+charge_locations = []
+locs = []
+f = open('text.txt', 'r')
+
+for line in f.readlines():
+    locs = []
+    for val in line.split():
+        locs.append(float(val))
+
+    charge_locations.append([locs[0], locs[1:4]])
+f.close()
+
+user_coords = []
+
+text = input("enter coordinates:")
+user_coords = list(map(float, text.split(',')))
+
+def difference(v1, v2):
+    return [v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]] 
+
+
+def length(vector):
+    a = ((vector[0]) ** 2 + (vector[1]) ** 2 + (vector[2]) ** 2) ** 0.5
+    return a
+
+
+def efield(q, r1, r2):
+    r_vector = difference(r1, r2)
+    eforce = k * q / (length(r_vector)) ** 3
+    return r_vector[0] * eforce, r_vector[1] * eforce, r_vector[2] * eforce
+
+
+final_x = 0.0
+final_y = 0.0
+final_z = 0.0
+for charge in charge_locations:
+    x, y, z = efield(charge[0], charge[1], user_coords)
+    final_x += x
+    final_y += y
+    final_z += z
+print("final x:", final_x)
+print("final y:", final_y)
+print("final z:", final_z)
+print(((final_x ** 2 + final_y ** 2 + final_z ** 2) ** 0.5))
