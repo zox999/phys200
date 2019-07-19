@@ -1,0 +1,35 @@
+"""This project is concerned with implementing a better
+approximation to a numerical integral, namely the Simpson’s rule
+(https://en.wikipedia.org/wiki/Simpson%27s_rule). This time, however, the code must
+take in a series of predefined x and f(x) values from a file."""
+
+#Project ID:3.1.1 S11
+#Project title: Simpson’s integration
+#
+#Name Surname:Zohra Shikhalizada
+#Student ID:2203594
+#
+#Version #1
+
+z=open('text.txt','r')
+aa = []
+bb = []
+for line in z:
+    p = line.split()
+    aa.append(float(p[0]))
+    bb.append(float(p[1]))
+z.close()
+print(aa,bb)
+def simpsons(x,f):
+	a=x[0]
+	b=x[len(x)-1]
+	c=f[0]
+	d=f[len(f)-1]
+	k=f[x.index((a+b)/2)]
+	answer=((b-a)/6)*(c+4*k+d)
+	print(answer)
+
+simpsons(aa,bb)
+
+
+
